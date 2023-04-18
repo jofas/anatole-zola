@@ -26,6 +26,7 @@
     </div>
   </div>
 </article>
+{% if extra.share %}
 <div class="share">
   <div class="weibo">
     <a class="fab fa-weibo"
@@ -37,6 +38,7 @@
       page.taxonomies.tags %}&hashtags={{ page.taxonomies.tags | join(sep="," ) }}{% endif %}"></a>
   </div>
 </div>
+{% endif %}
 {% include "comments.html" %}
 {% if page.extra.mathjax %}
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
