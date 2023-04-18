@@ -107,10 +107,12 @@
         {%- endif -%}
       </div>
       <div class="information">
+        {% if config.extra.back_button %}
         <div class="back_btn">
           <a onclick="window.history.go(-1)" {% if language_site_path=="/" %}style="display:none;" {% endif %}><i
               class="fas fa-chevron-left"></i></a>
         </div>
+        {% endif %}
         {% set language_count = 1 %}
         {% for language_name, language in config.languages %}
           {% set_global language_count = language_count + 1 %}
