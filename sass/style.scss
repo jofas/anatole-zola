@@ -166,9 +166,13 @@ img {
   }
 
   .information {
-    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
     padding-top: 12px;
     padding-right: 4px;
+    height: 32px;
 
     @media screen and (min-width: 470px) {
       padding-right: 20px;
@@ -176,13 +180,18 @@ img {
 
     .avatar {
       display: block;
-      float: right;
+      height: 32px;
 
       img {
         width: 32px;
         height: 32px;
         border-radius: 300px;
       }
+    }
+
+    #mode-switch {
+      width: 75px;
+      transform: scale(0.15),
     }
 
     #language-switch {

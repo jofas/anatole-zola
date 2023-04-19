@@ -13,8 +13,12 @@
   <link rel="apple-touch-icon" href="{{ get_url(path="images") }}/{{ config.extra.favicon }}"/>
 
   <link rel="short icon" href="{{ get_url(path="images") }}/{{ config.extra.favicon }}" type="image/x-icon" />
+
   <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
+  <link rel="stylesheet" href="{{ get_url(path="mode-toggle.css") }}">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
   {% if config.generate_feed %}
   {% block rss %}
@@ -140,7 +144,32 @@
           </div>
         </div>
         {% endif %}
-        <div class="avatar"><img src="{{ get_url(path="images") }}/{{ config.extra.avatar }}"></div>
+        <div id="mode-switch">
+          <input type="checkbox" id="mode-toggle">
+          <label for="mode-toggle" class="toggle">
+            <span class="toggle-button">
+              <span class="crater crater-1"></span>
+              <span class="crater crater-2"></span>
+              <span class="crater crater-3"></span>
+              <span class="crater crater-4"></span>
+              <span class="crater crater-5"></span>
+              <span class="crater crater-6"></span>
+              <span class="crater crater-7"></span>
+            </span>
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="star star-4"></span>
+            <span class="star star-5"></span>
+            <span class="star star-6"></span>
+            <span class="star star-7"></span>
+            <span class="star star-8"></span>
+          </label>
+        </div>
+        <div class="avatar">
+          <img id="avatar-img-light" src="{{ get_url(path="images") }}/{{ config.extra.avatar_light }}"/>
+          <img id="avatar-img-dark" style="display:none" src="{{ get_url(path="images") }}/{{ config.extra.avatar_dark }}"/>
+        </div>
       </div>
     </div>
     <div class="autopagerize_page_element">
@@ -150,23 +179,48 @@
       </div>
     </div>
   </div>
-  {% if config.extra.mode %}
-  {% elif config.extra.default_mode %}
   <script>
+    const html = document.getElementsByTagName("html")[0];
+    const checkbox = document.getElementById("mode-toggle");
+
+    const avatar_light = document.getElementById("avatar-img-light");
+    const avatar_dark = document.getElementById("avatar-img-dark");
+
+    var isDarkTheme = false;
+
     window.onload = function () {
-      const currentTheme = localStorage.getItem('theme');
-      const element = document.getElementsByTagName("html")[0];
-      if (currentTheme) {
-        element.classList.remove('theme--light');
-        element.classList.add('theme--' + currentTheme);
-      } else {
-        localStorage.setItem('theme', '{{config.extra.default_mode}}');
-        element.classList.remove('theme--light');
-        element.classList.add('theme--{{config.extra.default_mode}}');
+      let ls = localStorage.getItem("is_dark_theme");
+      let os_default = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      isDarkTheme = ls == "true" || os_default;
+
+      if (isDarkTheme) {
+        html.classList.remove("theme--light");
+        html.classList.add("theme--dark");
+        avatar_light.style.display = "none";
+        avatar_dark.style.display = "block";
+        checkbox.checked = true;
       }
     }
+
+    checkbox.onchange = function () {
+      isDarkTheme = !isDarkTheme;
+
+      if (isDarkTheme) {
+        html.classList.remove("theme--light");
+        html.classList.add("theme--dark");
+        avatar_light.style.display = "none";
+        avatar_dark.style.display = "block";
+      } else {
+        html.classList.remove("theme--dark");
+        html.classList.add("theme--light");
+        avatar_light.style.display = "block";
+        avatar_dark.style.display = "none";
+      }
+
+      localStorage.setItem("is_dark_theme", isDarkTheme);
+    }
   </script>
-  {% endif %}
   <script>
     function showLanguages() {
       let currentDisplay = document.getElementById("languages").style.display;
