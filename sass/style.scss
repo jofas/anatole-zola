@@ -175,12 +175,7 @@ img {
     }
 
     .avatar {
-      display: none;
-
-      @media screen and (min-width: 520px) {
-        display: block;
-      }
-
+      display: block;
       float: right;
 
       img {
