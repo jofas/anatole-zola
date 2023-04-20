@@ -838,6 +838,33 @@ a.btn {
   }
 }
 
+h1, h2, h3 {
+  .zola-anchor {
+    margin-left: -1.35rem;
+  }
+}
+
+h4 {
+  .zola-anchor {
+    margin-left: -1.2rem;
+    margin-right: 0.2rem;
+  }
+}
+
+h5 {
+  .zola-anchor {
+    margin-left: -1.1rem;
+    margin-right: 0.35rem;
+  }
+}
+
+h6 {
+  .zola-anchor {
+    margin-left: -1rem;
+    margin-right: 0.5rem;
+  }
+}
+
 /* color styles */
 /* light mode */
 html.theme--light {
@@ -1138,6 +1165,10 @@ html.theme--light {
       }
     }
   }
+
+  .zola-anchor {
+    color: rgba(0, 0, 0, 0.5)!important;
+  }
 }
 
 /* color styles */
@@ -1433,5 +1464,9 @@ html.theme--dark {
         }
       }
     }
+  }
+
+  .zola-anchor {
+    color: rgba(255, 255, 255, 0.8)!important;
   }
 }
