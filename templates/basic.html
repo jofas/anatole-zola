@@ -186,6 +186,9 @@
     const avatar_light = document.getElementById("avatar-img-light");
     const avatar_dark = document.getElementById("avatar-img-dark");
 
+    const utterances_light = document.getElementById("utterances-light");
+    const utterances_dark = document.getElementById("utterances-dark");
+
     var isDarkTheme = false;
 
     window.onload = function () {
@@ -197,8 +200,13 @@
       if (isDarkTheme) {
         html.classList.remove("theme--light");
         html.classList.add("theme--dark");
+
         avatar_light.style.display = "none";
         avatar_dark.style.display = "block";
+
+        utterances_light.style.display = "none";
+        utterances_dark.style.display = "block";
+
         checkbox.checked = true;
       }
     }
@@ -209,13 +217,21 @@
       if (isDarkTheme) {
         html.classList.remove("theme--light");
         html.classList.add("theme--dark");
+
         avatar_light.style.display = "none";
         avatar_dark.style.display = "block";
+
+        utterances_light.style.display = "none";
+        utterances_dark.style.display = "block";
       } else {
         html.classList.remove("theme--dark");
         html.classList.add("theme--light");
+
         avatar_light.style.display = "block";
         avatar_dark.style.display = "none";
+
+        utterances_light.style.display = "block";
+        utterances_dark.style.display = "none";
       }
 
       localStorage.setItem("is_dark_theme", isDarkTheme);
