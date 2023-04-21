@@ -40,18 +40,22 @@
 </div>
 {% endif %}
 {% include "comments.html" %}
-{% if page.extra.mathjax %}
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+{% if page.extra.katex %}
+<link rel="stylesheet" href="{{ get_url(path="third_party/katex/katex.min.css") }}">
+<script src="{{ get_url(path="third_party/katex/katex.min.js") }}" defer></script>
+<script src="{{ get_url(path="third_party/katex/auto-render.min.js") }}" defer></script>
 <script>
-  MathJax = {
-    tex: {
-      displayMath: [['$$', '$$'], ["\\[", "\\]"]],
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    }
-  };
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/{{ page.extra.mathjax }}-chtml.js">
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          throwOnError : false
+        });
+    });
 </script>
 {% endif %}
 {% if page.extra.tikzjax %}
