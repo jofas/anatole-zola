@@ -22,8 +22,8 @@
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
   {% if config.generate_feed %}
   {% block rss %}
-  <link rel="alternate" type="application/rss+xml" title="{{ config.title }}" href="{{ get_url(path=config.feed_filename) }},
-    trailing_slash=false, lang=lang) }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ config.title }}"
+    href="{{ get_url(path=config.feed_filename, trailing_slash=false, lang=lang) }}">
   {% endblock rss %}
   {% endif %}
   {% block extra_head %}
