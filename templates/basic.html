@@ -17,8 +17,9 @@
 
   <link rel="short icon" href="{{ get_url(path="images") }}/{{ config.extra.favicon }}" type="image/x-icon" />
 
-  <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
-  <link rel="stylesheet" href="{{ get_url(path="mode-toggle.css") }}">
+  <link rel="stylesheet" href="{{ get_url(path="style.css") }}"/>
+  <link rel="stylesheet" href="{{ get_url(path="tailwind.css") }}"/>
+  <link rel="stylesheet" href="{{ get_url(path="theme-toggle.css") }}"/>
 
   <link href="{{ get_url(path="third_party/fa/css/all.min.css") }}" rel="stylesheet">
 
@@ -148,9 +149,9 @@
           </div>
         </div>
         {% endif %}
-        <div id="mode-switch">
-          <input type="checkbox" id="mode-toggle">
-          <label for="mode-toggle" class="toggle">
+        <div class="inline-block pr-1 lg:pr-2">
+          <input type="checkbox" id="theme-toggle"/>
+          <label for="theme-toggle" class="toggle">
             <span class="toggle-button">
               <span class="crater crater-1"></span>
               <span class="crater crater-2"></span>
@@ -170,7 +171,7 @@
             <span class="star star-8"></span>
           </label>
         </div>
-        <div class="avatar">
+        <div class="avatar pl-1 lg:pl-2">
           <img id="avatar-img-light" alt="Avatar" src="{{ get_url(path="images") }}/{{ config.extra.avatar_light }}"/>
           <img id="avatar-img-dark" alt="Avatar" style="display:none" src="{{ get_url(path="images") }}/{{ config.extra.avatar_dark }}"/>
         </div>
@@ -185,7 +186,7 @@
   </div>
   <script>
     const html = document.getElementsByTagName("html")[0];
-    const checkbox = document.getElementById("mode-toggle");
+    const checkbox = document.getElementById("theme-toggle");
 
     const avatar_light = document.getElementById("avatar-img-light");
     const avatar_dark = document.getElementById("avatar-img-dark");
