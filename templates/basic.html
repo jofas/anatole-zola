@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" {% if config.extra.mode %} class="theme--{{config.extra.mode}}" {% else %} class="theme--light" {% endif
-  %}>
-
+<html lang="en" class="theme--light">
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -17,10 +15,26 @@
 
   <link rel="short icon" href="{{ get_url(path="images") }}/{{ config.extra.favicon }}" type="image/x-icon" />
 
-  <link rel="stylesheet" href="{{ get_url(path="style.css") }}">
-  <link rel="stylesheet" href="{{ get_url(path="mode-toggle.css") }}">
+  <link rel="stylesheet" href="{{ get_url(path="style.css") }}"/>
+  <link rel="stylesheet" href="{{ get_url(path="tailwind.css") }}"/>
+  <link rel="stylesheet" href="{{ get_url(path="theme-toggle.css") }}"/>
 
   <link href="{{ get_url(path="third_party/fa/css/all.min.css") }}" rel="stylesheet">
+
+  <script>
+    var isDarkTheme = false;
+
+    let theme = localStorage.getItem("theme");
+    let os_default = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    isDarkTheme = theme == "dark" || os_default;
+
+    if (isDarkTheme) {
+      document.documentElement.classList.add("dark");
+      // TODO: remove once theming done completely with tailwind
+      document.documentElement.classList.add("theme--dark");
+    }
+  </script>
 
   <title>{% block title %}{{ config.title }}{% endblock title %}</title>
   {% if config.generate_feed %}
@@ -148,9 +162,9 @@
           </div>
         </div>
         {% endif %}
-        <div id="mode-switch">
-          <input type="checkbox" id="mode-toggle">
-          <label for="mode-toggle" class="toggle">
+        <div class="flex flex-row pr-2">
+          <input type="checkbox" id="theme-toggle" aria-label="Theme Toggle"/>
+          <label for="theme-toggle" class="toggle">
             <span class="toggle-button">
               <span class="crater crater-1"></span>
               <span class="crater crater-2"></span>
@@ -170,9 +184,9 @@
             <span class="star star-8"></span>
           </label>
         </div>
-        <div class="avatar">
-          <img id="avatar-img-light" alt="Avatar" src="{{ get_url(path="images") }}/{{ config.extra.avatar_light }}"/>
-          <img id="avatar-img-dark" alt="Avatar" style="display:none" src="{{ get_url(path="images") }}/{{ config.extra.avatar_dark }}"/>
+        <div class="avatar pl-1 lg:pl-2">
+          <img alt="Avatar" class="block dark:hidden" src="{{ get_url(path="images") }}/{{ config.extra.avatar_light }}"/>
+          <img alt="Avatar" class="hidden dark:block" src="{{ get_url(path="images") }}/{{ config.extra.avatar_dark }}"/>
         </div>
       </div>
     </div>
@@ -184,61 +198,26 @@
     </div>
   </div>
   <script>
-    const html = document.getElementsByTagName("html")[0];
-    const checkbox = document.getElementById("mode-toggle");
+    const checkbox = document.getElementById("theme-toggle");
 
-    const avatar_light = document.getElementById("avatar-img-light");
-    const avatar_dark = document.getElementById("avatar-img-dark");
-
-    const utterances_light = document.getElementById("utterances-light");
-    const utterances_dark = document.getElementById("utterances-dark");
-
-    var isDarkTheme = false;
-
-    window.onload = function () {
-      let ls = localStorage.getItem("is_dark_theme");
-      let os_default = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-      isDarkTheme = ls == "true" || os_default;
-
-      if (isDarkTheme) {
-        html.classList.remove("theme--light");
-        html.classList.add("theme--dark");
-
-        avatar_light.style.display = "none";
-        avatar_dark.style.display = "block";
-
-        utterances_light.style.display = "none";
-        utterances_dark.style.display = "block";
-
-        checkbox.checked = true;
-      }
+    if (isDarkTheme) {
+      checkbox.checked = true;
     }
 
     checkbox.onchange = function () {
       isDarkTheme = !isDarkTheme;
 
       if (isDarkTheme) {
-        html.classList.remove("theme--light");
-        html.classList.add("theme--dark");
-
-        avatar_light.style.display = "none";
-        avatar_dark.style.display = "block";
-
-        utterances_light.style.display = "none";
-        utterances_dark.style.display = "block";
+        document.documentElement.classList.add("dark");
+        // TODO: remove once theming done completely with tailwind
+        document.documentElement.classList.add("theme--dark");
+        localStorage.setItem("theme", "dark");
       } else {
-        html.classList.remove("theme--dark");
-        html.classList.add("theme--light");
-
-        avatar_light.style.display = "block";
-        avatar_dark.style.display = "none";
-
-        utterances_light.style.display = "block";
-        utterances_dark.style.display = "none";
+        document.documentElement.classList.remove("dark");
+        // TODO: remove once theming done completely with tailwind
+        document.documentElement.classList.remove("theme--dark");
+        localStorage.removeItem("theme");
       }
-
-      localStorage.setItem("is_dark_theme", isDarkTheme);
     }
   </script>
   <script>
