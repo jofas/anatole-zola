@@ -33,7 +33,7 @@
 
 {% if config.extra.comment.utterances %}
   <a id="comments"></a>
-  <div id="utterances-light">
+  <div class="block dark:hidden">
     <script src="https://utteranc.es/client.js"
       repo="{{ config.extra.comment.utterances.repo }}"
       issue-term="{{ config.extra.comment.utterances.issue_term }}"
@@ -42,7 +42,7 @@
       async>
     </script>
   </div>
-  <div id="utterances-dark" style="display:none">
+  <div class="hidden dark:block">
     <script src="https://utteranc.es/client.js"
       repo="{{ config.extra.comment.utterances.repo }}"
       issue-term="{{ config.extra.comment.utterances.issue_term }}"
