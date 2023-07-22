@@ -1,0 +1,22 @@
+<!-- todo: other types than tip -->
+{% if type == "note" %}
+{% elif type == "tip" %}
+    {% set light_background_color = "bg-admonition-tip-light" %}
+    {% set light_border_color = "border-admonition-tip-border-light" %}
+    {% set dark_background_color = "dark:bg-admonition-tip-dark" %}
+    {% set dark_border_color = "dark:border-admonition-tip-border-dark" %}
+    {% set icon = "fa-lightbulb" %}
+{% elif type == "info" %}
+{% elif type == "caution" %}
+{% elif type == "danger" %}
+{% endif %}
+
+<div class="{{ light_background_color }} {{ dark_background_color }} border-solid border-0 border-l-4 {{ light_border_color }} {{ dark_border_color }} shadow-sm rounded-md p-4 pb-1">
+    <div class="uppercase font-bold">
+        <i class="fas {{ icon }} pr-1"></i>
+        {{ type }}
+    </div>
+    <div>
+        {{ body | markdown | safe }}
+    </div>
+</div>
