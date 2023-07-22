@@ -1,18 +1,32 @@
-<!-- todo: other types than tip -->
 {% if type == "note" %}
+    {% set light_background_color = "bg-admonition-note-light" %}
+    {% set dark_background_color = "dark:bg-admonition-note-dark" %}
+    {% set border_color = "border-admonition-note-border" %}
+    {% set icon = "fa-circle-info" %}
 {% elif type == "tip" %}
     {% set light_background_color = "bg-admonition-tip-light" %}
-    {% set light_border_color = "border-admonition-tip-border-light" %}
     {% set dark_background_color = "dark:bg-admonition-tip-dark" %}
-    {% set dark_border_color = "dark:border-admonition-tip-border-dark" %}
+    {% set border_color = "border-admonition-tip-border" %}
     {% set icon = "fa-lightbulb" %}
 {% elif type == "info" %}
+    {% set light_background_color = "bg-admonition-info-light" %}
+    {% set dark_background_color = "dark:bg-admonition-info-dark" %}
+    {% set border_color = "border-admonition-info-border" %}
+    {% set icon = "fa-exclamation-circle" %}
 {% elif type == "caution" %}
+    {% set light_background_color = "bg-admonition-caution-light" %}
+    {% set dark_background_color = "dark:bg-admonition-caution-dark" %}
+    {% set border_color = "border-admonition-caution-border" %}
+    {% set icon = "fa-exclamation-triangle" %}
 {% elif type == "danger" %}
+    {% set light_background_color = "bg-admonition-danger-light" %}
+    {% set dark_background_color = "dark:bg-admonition-danger-dark" %}
+    {% set border_color = "border-admonition-danger-border" %}
+    {% set icon = "fa-fire" %}
 {% endif %}
 
-<div class="{{ light_background_color }} {{ dark_background_color }} border-solid border-0 border-l-4 {{ light_border_color }} {{ dark_border_color }} shadow-sm rounded-md p-4 pb-1">
-    <div class="uppercase font-bold">
+<div class="{{ light_background_color }} {{ dark_background_color }} border-solid border-0 border-l-4 {{ border_color }} shadow-sm rounded-md p-4 pb-1 my-4">
+    <div class="uppercase font-bold text-lg">
         <i class="fas {{ icon }} pr-1"></i>
         {{ type }}
     </div>
